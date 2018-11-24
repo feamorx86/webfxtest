@@ -5,13 +5,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Worker;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import netscape.javascript.JSObject;
 
@@ -37,10 +44,11 @@ public class Controller {
 
     }
 
-    @FXML
-    private void initialize() {
+    private void configure() {
         webView.getEngine().load(startAddress);
+    }
 
+    private void setListeners() {
         navigateBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -82,13 +90,41 @@ public class Controller {
         });
     }
 
+    @FXML
+    public void onClickAtolExample(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("atol_test_dialog.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Пример работы с кассой");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)event.getSource()).getScene().getWindow() );
+            stage.showAndWait();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void initialize() {
+
+        configure();
+        setListeners();
+
+
+    }
+
     public class JavaApp {
 
-        private void print(String json) {
+        public void test(String json) {
             Logger.getAnonymousLogger().info(" receive json = "+json);
         }
 
-        private void exit() {
+        public void print(String json) {
+            Logger.getAnonymousLogger().info(" receive json = "+json);
+        }
+
+        public void exit() {
             Platform.exit();
         }
     }

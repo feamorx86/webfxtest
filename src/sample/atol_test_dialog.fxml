@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AtolTestDialog">
+   <children>
+      <HBox layoutX="0" layoutY="0" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="400.0">
+               <children>
+                  <Label text="1. Подключение к кассе">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <HBox prefHeight="40.0" prefWidth="400.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onClickConnect" text="Подключиться">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onAction="#onClickDisconnect" text="Отключиться">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label text="2. Параметры оператора">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Для настройки оператора необходимо задать некоторые его параметры.&#10; Тип параметра - число, значение - само значение.&#10; Типы:&#10; 1021 - ФИО&#10; 1203 - ИНН&#10;Или можно задать настройки по умолчанию:&#10;Иванов И.И. 500100732259" wrapText="true" />
+                  <VBox prefHeight="90.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                               <Label text="тип">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin></Label>
+                               <TextField fx:id="operatorParameter" text="1021">
+                                 <HBox.margin>
+                                    <Insets left="64.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                               <Label text="Значение">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                               <TextField fx:id="operatorValue" text="Иванов И.И.">
+                                   <HBox.margin>
+                                       <Insets left="30.0" />
+                                   </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                               <Button mnemonicParsing="false" onAction="#onClickOperatorSetParameter" text="Задать">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </HBox.margin></Button>
+                               <Button mnemonicParsing="false" onAction="#onClickOperatorUseDefault" text="use default" />
+                           </children></HBox>
+                     </children>
+                  </VBox>
+                   <Label text="3. Вход оператора">
+                       <font>
+                           <Font size="16.0" />
+                       </font>
+                   </Label>
+                   <Button mnemonicParsing="false" onAction="#onClickOperatorLogin" text="Вход">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+
+                   <Label text="4. Открытие чека">
+                       <font>
+                           <Font size="16.0" />
+                       </font>
+                   </Label>
+
+                   <Button mnemonicParsing="false" onAction="#onClicEndOfExample" text="Весь остальной кусок примера">
+                       <HBox.margin>
+                           <Insets left="10.0" right="20.0" />
+                       </HBox.margin></Button>
+
+               </children></VBox>
+            <TextArea fx:id="log" prefHeight="600" prefWidth="400.0" text="Лог">
+               <opaqueInsets>
+                  <Insets left="10.0" />
+               </opaqueInsets></TextArea>
+         </children></HBox>
+   </children>
+</AnchorPane>
