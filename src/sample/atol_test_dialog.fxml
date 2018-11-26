@@ -100,16 +100,86 @@
                         <Font size="14.0" />
                      </font></Button>
 
-                   <Label text="4. Открытие чека">
+                   <Label text="4. Чек">
                        <font>
                            <Font size="16.0" />
                        </font>
                    </Label>
+                  <HBox prefHeight="30" prefWidth="200.0">
+                     <children>
 
-                   <Button mnemonicParsing="false" onAction="#onClicEndOfExample" text="Весь остальной кусок примера">
-                       <HBox.margin>
-                           <Insets left="10.0" right="20.0" />
-                       </HBox.margin></Button>
+                         <Button mnemonicParsing="false" onAction="#onClickOpenReceipt" text="Открыть чек">
+                             <HBox.margin>
+                                 <Insets left="10.0" />
+                             </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onClickAddItem" text="Добавить товар">
+                           <HBox.margin>
+                               <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onClickTotal" text="Итог">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+
+                   <HBox prefHeight="30" prefWidth="200.0">
+                       <children>
+                           <Button mnemonicParsing="false" onAction="#onClickPayment" text="Оплата">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                           <Button mnemonicParsing="false" onAction="#onClickCloseReceipt" text="Закрыть чек">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                           <Button mnemonicParsing="false" onAction="#onClickCheckClose" text="Проверить закрытие">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                       </children>
+                   </HBox>
+
+                   <HBox prefHeight="30" prefWidth="200.0">
+                       <children>
+                           <Button mnemonicParsing="false" onAction="#onClickRequestClose" text="Отчёт о закрытии чека">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                           <Button mnemonicParsing="false" onAction="#onClickSlipEGAIS" text="Формирование слипа ЕГАИС">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                       </children>
+                   </HBox>
+
+                   <HBox prefHeight="30" prefWidth="200.0">
+                       <children>
+                           <Button mnemonicParsing="false" onAction="#onClickClose" text="Закрыть смену">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                           <Button mnemonicParsing="false" onAction="#onClickListNotSend" text="Список не закрытых">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                           <Button mnemonicParsing="false" onAction="#onClickWorkEnd" text="Конец работы">
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </Button>
+                       </children>
+                   </HBox>
 
                </children></VBox>
             <TextArea fx:id="log" prefHeight="600" prefWidth="400.0" text="Лог">

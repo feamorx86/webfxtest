@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="libfptr10.jar" size="20112" download="eager" />
-    <jar href="webjfx.jar" size="13903" download="eager" />
+    <jar href="webjfx.jar" size="15061" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="sample.Main"  name="webjfx" />
   <update check="background"/>
