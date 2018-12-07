@@ -22,6 +22,16 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import netscape.javascript.JSObject;
 
+import javax.net.ssl.*;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 public class Controller {
@@ -40,7 +50,8 @@ public class Controller {
     private String startAddress;
 
     public  Controller() {
-        startAddress = "http://crm.nsi1.test.xz-lab.ru/kkm/control";
+        //startAddress = "http://crm.nsi1.test.xz-lab.ru/kkm/control";
+        startAddress = "https://feamorx86.ru";
 
     }
 
@@ -107,11 +118,76 @@ public class Controller {
 
     @FXML
     private void initialize() {
-
+        readConfig();
+        configureSSL();
         configure();
         setListeners();
+    }
+
+    private void configureSSL() {
+        try {
+            InputStream derInputStream = getClass().getResourceAsStream(properties.getProperty("certificate_file"));
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            X509Certificate cert = (X509Certificate) certificateFactory.generateCertificate(derInputStream);
+            String alias = cert.getSubjectX500Principal().getName();
+
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null);
+            trustStore.setCertificateEntry(alias, cert);
+            KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+            kmf.init(trustStore, null);
+            KeyManager[] keyManagers = kmf.getKeyManagers();
+
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance("X509");
+            tmf.init(trustStore);
+            TrustManager[] trustManagers = tmf.getTrustManagers();
+
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(keyManagers, trustManagers, null);
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+//            URL url = new URL(someURL);
+
+//            conn = (HttpsURLConnection) url.openConnection();
+//            conn.setSSLSocketFactory(sslContext.getSocketFactory());
 
 
+//
+//            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+//            keyStore.load(trustStore, trustStorePassword);
+//            trustStore.close();
+//
+//            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+//            trustStore.load(null);
+//            trustStore.setCertificateEntry(alias, cert);
+//            KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+//            kmf.init(trustStore, null);
+//            KeyManager[] keyManagers = kmf.getKeyManagers();
+//
+//            TrustManagerFactory tmf = TrustManagerFactory.getInstance("X509");
+//            tmf.init(trustStore);
+//            TrustManager[] trustManagers = tmf.getTrustManagers();
+//
+//            SSLContext sslContext = SSLContext.getInstance("TLS");
+//            sslContext.init(keyManagers, trustManagers, null);
+            URL url = new URL(startAddress);
+            url.openConnection().getContent();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private Properties properties;
+
+    private void readConfig() {
+        properties = new Properties();
+        try {
+            InputStream in = getClass().getResourceAsStream("/resources/config.properties");
+            properties.load(in);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public class JavaApp {
